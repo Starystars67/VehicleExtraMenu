@@ -4,6 +4,9 @@ local Menupool = MenuPool.New()
 local MainMenu = UIMenu.New('Vehicle Extras', '~b~Enable/Disable vehicle extras')
 local TrailerMenu, MenuExists, Vehicle, TrailerHandle, GotTrailer, DeletingMenu
 Menupool:Add(MainMenu)
+Menupool:MouseControlsEnabled (false);
+Menupool:MouseEdgeEnabled (false);
+Menupool:ControlDisablingEnabled(false);
 
 -- Actual Menu [
 

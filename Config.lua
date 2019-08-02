@@ -6,4 +6,3 @@ VEM.DisableAutoRepair = true
 
 --Change "false" to "true" to disable the Menu for Non-Admins
 VEM.OnlyForAdmins = false
-

@@ -20,20 +20,19 @@ end)
 
 Citizen.CreateThread(function() --Controls
 	VEM.CheckStuff()
-
 	while true do
 		Citizen.Wait(0)
 
 		if not DeletingMenu then
 			Menupool:ProcessMenus()
 		end
-		
+
 		local IsInVehicle = IsPedInAnyVehicle(PlayerPedId(), false)
 
 		if ((GetIsControlJustPressed(VEM.KBKey) and GetLastInputMethod(2))) and ((VEM.OnlyForAdmins and IsAdmin) or not VEM.OnlyForAdmins) and MenuExists then
 			MainMenu:Visible(not MainMenu:Visible())
 		end
-		
+
 		local CurrentVehicle = GetVehiclePedIsIn(PlayerPedId(), false)
 		local Got, Handle = GetVehicleTrailerVehicle(CurrentVehicle)
 
@@ -61,12 +60,12 @@ function VEM.CreateMenu(Got, Handle)
 			AvailableExtras.VehicleExtras[ExtraID] = (IsVehicleExtraTurnedOn(Vehicle, ExtraID) == 1)
 			GotVehicleExtras = true
 		end
-		
+
 		if GotTrailer and DoesExtraExist(TrailerHandle, ExtraID) then
 			if not TrailerMenu then
 				TrailerMenu = Menupool:AddSubMenu(MainMenu, 'Trailer Extras', '~b~Enable/Disable trailer extras')
 			end
-			
+
 			AvailableExtras.TrailerExtras[ExtraID] = (IsVehicleExtraTurnedOn(TrailerHandle, ExtraID) == 1)
 			GotTrailerExtras = true
 		end
@@ -75,7 +74,7 @@ function VEM.CreateMenu(Got, Handle)
 	-- Vehicle Extras
 			if GotVehicleExtras then
 				SetVehicleAutoRepairDisabled(Vehicle, VEM.DisableAutoRepair)
-				
+
 				for Key, Value in pairs(AvailableExtras.VehicleExtras) do
 					local ExtraItem = UIMenuCheckboxItem.New('Extra ' .. Key, AvailableExtras.VehicleExtras[Key])
 					MainMenu:AddItem(ExtraItem)
@@ -99,7 +98,7 @@ function VEM.CreateMenu(Got, Handle)
 	-- Trailer Extras
 			if GotTrailerExtras then
 				SetVehicleAutoRepairDisabled(TrailerHandle, VEM.DisableAutoRepair)
-				
+
 				for Key, Value in pairs(AvailableExtras.TrailerExtras) do
 					local ExtraItem = UIMenuCheckboxItem.New('Extra ' .. Key, AvailableExtras.TrailerExtras[Key])
 					TrailerMenu:AddItem(ExtraItem)
@@ -163,4 +162,3 @@ function GetIsControlJustPressed(Control)
 	end
 	return false
 end
-
